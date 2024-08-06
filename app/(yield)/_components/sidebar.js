@@ -20,7 +20,7 @@ export default function Sidebar() {
         <Button variant="secondary">
           <Link href="/">Welcome</Link>
         </Button>
-        
+
         <ul className='space-y-4 w-full'>
           {links.map((link, index) => (
             <li key={index}>

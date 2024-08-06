@@ -48,7 +48,7 @@ export default function Home() {
 
         {userId ? (
         <Button>
-          <Link href="/">Go to Dashboard</Link>
+          <Link href="/dashboard">Go to Dashboard</Link>
         </Button>
         ) : (      
           <ul className="flex items-center justify-center gap-4">
