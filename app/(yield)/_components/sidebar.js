@@ -8,7 +8,7 @@ export default function Sidebar() {
     { href: "/inventory", label: "Inventory" },
     { href: "/yield", label: "Yield" },
     { href: "/tracability", label: "traceability and batches" },
-    { href: "#", label: "Cleaning" },
+    { href: "/cleaning", label: "Cleaning" },
     { href: "/privacy-policy", label: "Privacy Policy" },
   ];
 
@@ -20,7 +20,7 @@ export default function Sidebar() {
         <Button variant="secondary">
           <Link href="/">Welcome</Link>
         </Button>
-
+        
         <ul className='space-y-4 w-full'>
           {links.map((link, index) => (
             <li key={index}>
