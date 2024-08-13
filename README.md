@@ -1,4 +1,14 @@
+# Welcome to INVOICERNEXT
 
+  On this website, you will be able to benefit from various features. Such as the possibility of creating an invoice,
+  making an inventory, making a return to calculate a margin for a product,
+  recording a traceability follow-up or a cleaning follow-up.
+
+## Bienvenue sur INVOICERNEXT
+
+Sur ce site web, vous pourrez profiter de divers fonctionnalitées. 
+Comme la possibilitée de créer une facture, de faire un inventaire, de faire un rendement pour vous calculer une marge d'un produit,
+d'enregistrer un suivie de tracabilitée ou un suivie de nettoyage.
 
 ## Getting Started
 
