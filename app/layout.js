@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL("http://localhost:3000"),
-  title: "Curriculum vitæ | Generate and create invoice online!",
+  title: "Invoicer | Generate and create online!",
   description: "Invoicer | Generate and create invoice online! ",
   twitter: {
     card: "summary_large_image",

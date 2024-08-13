@@ -37,9 +37,7 @@ export default function Home() {
 
       </header>
 
-      <section className="relative py-32 space-y-8 max-w-4xl mx-auto text-center">
-        <div className="absolute left-0 top-0 h-40 w-40 bg-pink-400 blur-[100px]"></div>
-        <div className="absolute right-0 bottom-0 h-40 w-40 bg-blue-400 blur-[100px]"></div>
+      <section className="relative py-20 space-y-8 max-w-4xl mx-auto text-center">
 
         <h1 className="text-4xl lg:text-6xl text-slate-800 font-bold">Welcome to Invoicer</h1>
         <p className="text-muted-forground text-lg lg:text-xl">
@@ -47,13 +45,20 @@ export default function Home() {
           This version offers improved performance,
           better responsiveness and better UI design by Alexandre Dincq.
         </p>
+        <div className="border"></div>
+
+        <p className="text-muted-forground text-lg lg:text-xl">
+          Créez facilement des factures pour vous et vos clients, le tout depuis le confort de votre PC.
+          Cette version offre des performances améliorées,
+          une meilleure réactivité et un meilleur design UI par Alexandre Dincq.
+        </p>
 
         {userId ? (
           <Button>
             <Link href="/dashboard">Go to Dashboard</Link>
           </Button>
         ) : (
-          <ul className="flex items-center justify-center gap-4">
+          <ul className="flex items-center justify-center gap-4 py-12">
             <li>
               <Button variant="secondary">
                 <Link href="/sign-up">Sign Up</Link>
