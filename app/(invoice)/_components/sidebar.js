@@ -9,7 +9,6 @@ export default function Sidebar() {
     { href: "/yield", label: "Yield" },
     { href: "/tracability", label: "traceability and batches" },
     { href: "/cleaning", label: "Cleaning" },
-    { href: "/privacy-policy", label: "Privacy Policy" },
   ];
 
 
