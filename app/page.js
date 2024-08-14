@@ -4,9 +4,7 @@ import Link from "next/link";
 
 
 export default function Home() {
-
   const { userId } = auth();
-
 
   return (
     <div className="p-4">

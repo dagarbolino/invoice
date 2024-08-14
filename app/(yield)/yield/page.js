@@ -68,8 +68,8 @@ export default function Yield() {
   }
 
   useEffect(() => {
-    calculateTotal(total);
-  }, [quantity, price, total]);
+    calculateTotal();
+  }, [quantity, price, calculateTotal]);
 
   // Fonction calculate margin
   function calculateMargin() {
@@ -80,7 +80,7 @@ export default function Yield() {
 
   useEffect(() => {
     setMargin(calculateMargin());
-  }, [totalAmount, purchase]);
+  }, [totalAmount, purchase, calculateMargin]);
 
   // Calculate total amount  
   function calculateTotalAmount() {
@@ -90,7 +90,7 @@ export default function Yield() {
 
   useEffect(() => {
     calculateTotalAmount();
-  }, [items]);
+  }, [items, calculateTotalAmount]);
 
   // Delete function in table items
   function handleDelete(id) {
@@ -108,23 +108,23 @@ export default function Yield() {
     setPrice(itemToEdit.price);
   }
 
-// Create PDF
-function createPDF() {
-  const invoice = document.getElementById("pdf");
-  html2canvas(invoice, {
-    logging: true,
-    letterRendering: 1,
-    useCORS: true,
-    scale: 4, 
-  }).then((canvas) => {
-    const imgWidth = 210;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const imgData = canvas.toDataURL("img/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    pdf.save(`${clientName}.pdf`);
-  });
-}
+  // Create PDF
+  function createPDF() {
+    const invoice = document.getElementById("pdf");
+    html2canvas(invoice, {
+      logging: true,
+      letterRendering: 1,
+      useCORS: true,
+      scale: 4, 
+    }).then((canvas) => {
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("img/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save(`${clientName}.pdf`);
+    });
+  }
 
   const values = {
     name, setName,
@@ -147,6 +147,7 @@ function createPDF() {
     purchase, setPurchase,
     weight, setWeight
   };
+}
 
   return (
     <>

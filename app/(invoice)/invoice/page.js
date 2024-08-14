@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
@@ -8,7 +8,6 @@ import PreviewInvoice from "../_components/previewinvoice";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 import { PencilIcon, Trash, XIcon } from "lucide-react";
 
@@ -42,15 +41,14 @@ export default function Invoice() {
 
   const [notes, setNotes] = useState("");
 
-  const [isEdeting, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const [previewInvoice, setPreviewInvoice] = useState(false);
-
 
   function handleSubmit(e) {
     e.preventDefault();
 
-  if (!item || !quantity || !price ) {
+    if (!item || !quantity || !price ) {
       toast.error("Please fill in all fields");
     } else {
       const newItem = {
@@ -65,64 +63,60 @@ export default function Invoice() {
       setQuantity("");
       setPrice("");
       toast.success("Item added successfully");
+    }
   }
-}
 
-  function calculateTotal() {
+  const calculateTotal = useCallback(() => {
     setTotal(quantity * price);
+  }, [quantity, price]);
 
-  }
   useEffect(() => {
-    calculateTotal(total);
-  }, [quantity, price, total]);
+    calculateTotal();
+  }, [quantity, price, calculateTotal]);
 
-
-// Calculate total amount  
-  function calculateTotalAmount() {
+  // Calculate total amount  
+  const calculateTotalAmount = useCallback(() => {
     const allItems = items.map((item) => item.total);
-
     setTotalAmount(collect(allItems).sum());
-  }
+  }, [items]);
 
   useEffect(() => {
     calculateTotalAmount();
-  });
+  }, [items, calculateTotalAmount]);
 
-
-//Delete function in table items
+  //Delete function in table items
   function handleDelete(id) {
-    setItems(items.filter((row) => row.id !== id))
-    toast.error("Item deleted successfully")
+    setItems(items.filter((row) => row.id !== id));
+    toast.error("Item deleted successfully");
   }
 
   //Edit function in table items
   function handleEdit(id) {
     const itemToEdit = items.find((row) => row.id === id);
     setItems(items.filter((row) => row.id !== id));
-    setIsEditing(true)
+    setIsEditing(true);
     setItem(itemToEdit.item);
     setQuantity(itemToEdit.quantity);
     setPrice(itemToEdit.price);
   }
 
-// Create PDF
-function createPDF() {
-  const invoice = document.getElementById("pdf");
-  html2canvas(invoice, {
-    logging: true,
-    letterRendering: 1,
-    useCORS: true,
-    scale: 4, 
-  }).then((canvas) => {
-    const imgWidth = 210;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const imgData = canvas.toDataURL("img/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-    pdf.save(`${clientName}.pdf`);
-  });
-}
-
+  // Create PDF
+  function createPDF() {
+    const invoice = document.getElementById("pdf");
+    html2canvas(invoice, {
+      logging: true,
+      letterRendering: 1,
+      useCORS: true,
+      scale: 4, 
+    }).then((canvas) => {
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("img/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      pdf.save(`${clientName}.pdf`);
+    });
+  }
 
   const values = {
     name, setName,
@@ -143,8 +137,9 @@ function createPDF() {
     items, setItems,
     notes, setNotes,
     totalAmount, setTotalAmount,
-  }
-
+  };
+}
+  
   return (
     <>
       <ToastContainer theme="colored" />

@@ -9,7 +9,6 @@ import PreviewInv from "../_components/PreviewInventory";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 import { PencilIcon, Trash, XIcon } from "lucide-react";
 
 import { collect } from "collect.js";
@@ -24,14 +23,14 @@ export default function Inventory() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [inventoryDate, setInventoryDate] = useState("");
 
-  // Client sate value
+  // Client state value
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientAddress, setClientAddress] = useState("");
   const [clientProductDepartment, setClientProductDepartment] = useState("");
   const [clientInventoryNumber, setClientInventoryNumber] = useState("");
 
-  //Table state values
+  // Table state values
   const [item, setItem] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -41,10 +40,9 @@ export default function Inventory() {
 
   const [notes, setNotes] = useState("");
 
-  const [isEdeting, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const [previewInv, setPreviewInventory] = useState(false);
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -69,36 +67,33 @@ export default function Inventory() {
 
   function calculateTotal() {
     setTotal(quantity * price);
-
   }
-  useEffect(() => {
-    calculateTotal(total);
-  }, [quantity, price, total]);
 
+  useEffect(() => {
+    calculateTotal();
+  }, [quantity, price, calculateTotal]);
 
   // Calculate total amount  
   function calculateTotalAmount() {
     const allItems = items.map((item) => item.total);
-
     setTotalAmount(collect(allItems).sum());
   }
 
   useEffect(() => {
     calculateTotalAmount();
-  });
+  }, [items]);
 
-
-  //Delete function in table items
+  // Delete function in table items
   function handleDelete(id) {
-    setItems(items.filter((row) => row.id !== id))
-    toast.error("Item deleted successfully")
+    setItems(items.filter((row) => row.id !== id));
+    toast.error("Item deleted successfully");
   }
 
-  //Edit function in table items
+  // Edit function in table items
   function handleEdit(id) {
     const itemToEdit = items.find((row) => row.id === id);
     setItems(items.filter((row) => row.id !== id));
-    setIsEditing(true)
+    setIsEditing(true);
     setItem(itemToEdit.item);
     setQuantity(itemToEdit.quantity);
     setPrice(itemToEdit.price);
@@ -122,7 +117,6 @@ export default function Inventory() {
     });
   }
 
-
   const values = {
     name, setName,
     email, setEmail,
@@ -141,8 +135,8 @@ export default function Inventory() {
     items, setItems,
     notes, setNotes,
     totalAmount, setTotalAmount,
-  }
-
+  };
+}
   return (
     <>
       <ToastContainer theme="colored" />

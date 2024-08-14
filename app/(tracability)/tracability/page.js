@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
@@ -8,7 +8,6 @@ import PreviewTracability from "../_components/PreviewTracability";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 import { PencilIcon, Trash, XIcon } from "lucide-react";
 
@@ -42,10 +41,9 @@ export default function Tracability() {
 
   const [notes, setNotes] = useState("");
 
-  const [isEdeting, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const [previewTracability, setPreviewTracability] = useState(false);
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -71,38 +69,35 @@ export default function Tracability() {
     }
   }
 
-  function calculateTotal() {
+  const calculateTotal = useCallback(() => {
     setTotal(quantity * price);
+  }, [quantity, price]);
 
-  }
   useEffect(() => {
-    calculateTotal(total);
-  }, [quantity, price, total]);
-
+    calculateTotal();
+  }, [quantity, price, calculateTotal]);
 
   // Calculate total amount  
-  function calculateTotalAmount() {
+  const calculateTotalAmount = useCallback(() => {
     const allItems = items.map((item) => item.total);
-
     setTotalAmount(collect(allItems).sum());
-  }
+  }, [items]);
 
   useEffect(() => {
     calculateTotalAmount();
-  });
-
+  }, [items, calculateTotalAmount]);
 
   //Delete function in table items
   function handleDelete(id) {
-    setItems(items.filter((row) => row.id !== id))
-    toast.error("Item deleted successfully")
+    setItems(items.filter((row) => row.id !== id));
+    toast.error("Item deleted successfully");
   }
 
   //Edit function in table items
   function handleEdit(id) {
     const itemToEdit = items.find((row) => row.id === id);
     setItems(items.filter((row) => row.id !== id));
-    setIsEditing(true)
+    setIsEditing(true);
     setItem(itemToEdit.item);
     setQuantity(itemToEdit.quantity);
     setPrice(itemToEdit.price);
@@ -126,7 +121,6 @@ export default function Tracability() {
     });
   }
 
-
   const values = {
     name, setName,
     email, setEmail,
@@ -146,8 +140,8 @@ export default function Tracability() {
     items, setItems,
     notes, setNotes,
     totalAmount, setTotalAmount,
-  }
-
+  };
+}
   return (
     <>
       <ToastContainer theme="colored" />
@@ -333,15 +327,6 @@ export default function Tracability() {
                     onChange={(e) => setReceiptDate(e.target.value)}
                   />
                 </article>
-
-
-
-
-
-
-
-
-
 
 
               <div className="grid gap-4 md:grid-cols-2">

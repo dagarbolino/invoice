@@ -73,7 +73,7 @@ export default function PreviewYield({ values, margin }) {
 
         <article>
           <h2 className='text-2xl text-slate-900 font-bold mt-8'>
-            Prix d'achat HT:
+            Prix d&apos;achat HT:
             <span className='text-3xl'> {values.purchase}</span>€
           </h2>
         </article>
