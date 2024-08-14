@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -71,7 +72,7 @@ export default function Inventory() {
 
   useEffect(() => {
     calculateTotal();
-  }, [quantity, price, calculateTotal]);
+  }, [quantity, price]);
 
   // Calculate total amount  
   function calculateTotalAmount() {
@@ -136,7 +137,7 @@ export default function Inventory() {
     notes, setNotes,
     totalAmount, setTotalAmount,
   };
-}
+
   return (
     <>
       <ToastContainer theme="colored" />

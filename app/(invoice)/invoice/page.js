@@ -41,7 +41,7 @@ export default function Invoice() {
 
   const [notes, setNotes] = useState("");
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEdeting, setIsEditing] = useState(false);
 
   const [previewInvoice, setPreviewInvoice] = useState(false);
 
@@ -138,7 +138,7 @@ export default function Invoice() {
     notes, setNotes,
     totalAmount, setTotalAmount,
   };
-}
+
   
   return (
     <>

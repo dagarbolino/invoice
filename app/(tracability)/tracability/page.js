@@ -41,7 +41,7 @@ export default function Tracability() {
 
   const [notes, setNotes] = useState("");
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEdeting, setIsEditing] = useState(false);
 
   const [previewTracability, setPreviewTracability] = useState(false);
 
@@ -141,7 +141,7 @@ export default function Tracability() {
     notes, setNotes,
     totalAmount, setTotalAmount,
   };
-}
+
   return (
     <>
       <ToastContainer theme="colored" />

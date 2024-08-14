@@ -41,7 +41,7 @@ export default function Cleaning() {
 
   const [notes, setNotes] = useState("");
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEdeting, setIsEditing] = useState(false);
 
   const [previewTracability, setPreviewTracability] = useState(false);
 
@@ -141,7 +141,6 @@ export default function Cleaning() {
     notes, setNotes,
     totalAmount, setTotalAmount,
   };
-}
 
   return (
     <>
