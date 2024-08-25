@@ -1,3 +1,18 @@
-export default {
-  swcMinify: true, // Assurez-vous que SWC est activé
+const config = {
+  swcMinify: true,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow',
+          },
+        ],
+      },
+    ];
+  },
 };
+
+export default config;
