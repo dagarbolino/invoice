@@ -6,7 +6,7 @@ import { collect } from "collect.js";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { PencilIcon, Trash, XIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
@@ -63,34 +63,34 @@ export default function Yield() {
     }
   }
 
-  function calculateTotal() {
+  
+
+  const calculateTotal = useCallback(() => {
     setTotal(quantity * price);
-  }
+  }, [quantity, price]);
 
   useEffect(() => {
-    calculateTotal(total);
-  }, [quantity, price, total]);
+    calculateTotal();
+  }, [calculateTotal]);
 
-  // Fonction calculate margin
-  function calculateMargin() {
+  const calculateMargin = useCallback(() => {
     const marginPrice = totalAmount - purchase;
     const margin = (marginPrice / purchase) * 100;
     return margin.toFixed(2);
-  }
+  }, [totalAmount, purchase]);
 
   useEffect(() => {
     setMargin(calculateMargin());
-  }, [totalAmount, purchase]);
+  }, [calculateMargin]);
 
-  // Calculate total amount  
-  function calculateTotalAmount() {
+  const calculateTotalAmount = useCallback(() => {
     const allItems = items.map((item) => item.total);
     setTotalAmount(collect(allItems).sum());
-  }
+  }, [items]);
 
   useEffect(() => {
     calculateTotalAmount();
-  }, [items]);
+  }, [calculateTotalAmount]);
 
   // Delete function in table items
   function handleDelete(id) {

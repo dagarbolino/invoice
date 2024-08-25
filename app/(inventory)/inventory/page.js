@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
@@ -66,23 +66,24 @@ export default function Inventory() {
     }
   }
 
-  function calculateTotal() {
+  const calculateTotal = useCallback(() => {
     setTotal(quantity * price);
-  }
+  }, [quantity, price]);
 
   useEffect(() => {
     calculateTotal();
-  }, [quantity, price]);
+  }, [quantity, price, calculateTotal]);
 
   // Calculate total amount  
-  function calculateTotalAmount() {
+  const calculateTotalAmount = useCallback(() => {
     const allItems = items.map((item) => item.total);
     setTotalAmount(collect(allItems).sum());
-  }
+  }, [items]);
+
 
   useEffect(() => {
     calculateTotalAmount();
-  }, [items]);
+  }, [items, calculateTotalAmount]);
 
   // Delete function in table items
   function handleDelete(id) {
