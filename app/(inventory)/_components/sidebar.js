@@ -5,7 +5,6 @@ export default function Sidebar() {
   const links = [
     { href: "/dashboard", label: "Dashboard" },
     { href: "/invoice", label: "Invoice" },
-    { href: "/inventory", label: "Inventory" },
     { href: "/yield", label: "Yield" },
     { href: "/tracability", label: "traceability and batches" },
     { href: "/cleaning", label: "Cleaning" },

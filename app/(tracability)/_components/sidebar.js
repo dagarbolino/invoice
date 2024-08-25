@@ -7,7 +7,6 @@ export default function Sidebar() {
     { href: "/invoice", label: "Invoice" },
     { href: "/inventory", label: "Inventory" },
     { href: "/yield", label: "Yield" },
-    { href: "/tracability", label: "traceability and batches" },
     { href: "/cleaning", label: "Cleaning" },
   ];
 
