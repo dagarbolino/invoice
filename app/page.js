@@ -15,7 +15,7 @@ export default function Home() {
 
         {userId ? (
           <Button>
-            <Link href="#">Go to ....</Link>
+            <Link href="#">Go to ...</Link>
           </Button>
         ) : (
           <ul className="flex items-center gap-4">
